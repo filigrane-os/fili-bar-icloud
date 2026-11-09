@@ -7,3 +7,4 @@ cmd = "./bin/icloud-state"
 interval = 300
 click = "./bin/icloud-reconnect"
 autostart = ["./bin/icloud-mount"]
+packages = ["rclone"]

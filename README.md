@@ -11,6 +11,10 @@ The daemon starts at login by itself (`autostart` in `module.toml`, run by niri 
 
 `fili-bar install` also runs `install.sh`: it creates your options file from `config.example.toml`, asks for what is missing (credentials go to the keyring or to a file under `~/.config`, never to this folder) and prints what is left to do. Run it again with `fili-bar setup icloud`; it is safe to repeat.
 
+## Packages
+
+Declared in `module.toml` (`packages`), installed by `fili-bar install --yes`: `rclone` (~106 MB on disk; the mount is resident, ~50-90 MB).
+
 ## Personal data
 
 Apple credentials stay in the rclone config (`~/.config/rclone/`), outside this repository. Options: copy `config.example.toml` to `~/.config/filigrane/bar/icloud.toml`.
