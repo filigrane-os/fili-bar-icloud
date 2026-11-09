@@ -1,0 +1,4 @@
+#!/bin/sh
+# One JSON line for the bar: shown only while ~/iCloud is not mounted (empty text = hidden).
+. "$(dirname "$(readlink -f "$0")")/opt.sh"
+mountpoint -q "$(opt mountpoint "$HOME/iCloud")" && printf '{"text": ""}\n' || printf '{"text": "iCloud", "class": "off", "tooltip": "iCloud Drive is not mounted"}\n'

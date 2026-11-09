@@ -1,0 +1,21 @@
+#!/bin/bash
+# Reminder before the Apple session of iCloud Drive expires (30 days, interactive renewal: 2FA code).
+# Started by cron-watch (once a day): from the 25th day, a notification with a button that opens icloud-reconnect.
+STATE="$HOME/.local/state/icloud"
+. "$(dirname "$(readlink -f "$0")")/opt.sh"
+LIFE="$(opt session_days 30)" WARN="$(opt warn_after_days 25)"
+
+rclone listremotes 2>/dev/null | grep -qx icloud: || exit 0
+[ -e "$STATE/auth.stamp" ] || { mkdir -p "$STATE"; touch "$STATE/auth.stamp"; }
+age=$(( ($(date +%s) - $(stat -c %Y "$STATE/auth.stamp")) / 86400 ))
+[ "$age" -lt "$WARN" ] && exit 0
+
+left=$(( LIFE - age ))
+if [ "$left" -gt 0 ]; then msg="La session expire dans $left j (code 2FA requis)"; else msg="La session a expiré: ~/iCloud ne répond plus"; fi
+# notify-send -A waits for the click: in the background so as not to block cron-watch
+(
+    [ "$(notify-send -u critical -a icloud -A reconnect=Reconnecter "Reconnexion iCloud" "$msg")" = reconnect ] &&
+        "$HOME/.local/bin/bar-tui" icloud-reconnect
+) >/dev/null 2>&1 &
+disown
+exit 0

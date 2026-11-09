@@ -1,0 +1,16 @@
+#!/bin/bash
+# Renews the Apple session of iCloud Drive (password + 2FA code, valid for 30 days) then remounts ~/iCloud.
+# Interactive: started in a floating foot by the button of the iCloud notifications (bar-tui icloud-reconnect).
+STATE="$HOME/.local/state/icloud"
+mkdir -p "$STATE"
+
+if rclone config reconnect icloud:; then
+    touch "$STATE/auth.stamp"
+    fusermount3 -uz "$HOME/iCloud" 2>/dev/null  # the mount keeps the old session in memory
+    sleep 1
+    setsid -f "$HOME/.local/bin/icloud-mount" >/dev/null 2>&1
+    notify-send -u low -a icloud "iCloud reconnecté" "Session valable 30 jours"
+else
+    echo; echo "Échec de la reconnexion."
+fi
+read -rp "Entrée pour fermer"

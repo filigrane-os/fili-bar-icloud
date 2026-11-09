@@ -1,0 +1,5 @@
+# Copy to ~/.config/filigrane/bar/icloud.toml (never committed).
+remote = "icloud:"           # rclone remote (created with `rclone config`, type iclouddrive)
+mountpoint = "~/iCloud"
+session_days = 30            # lifetime of the Apple session
+warn_after_days = 25         # remind from this day on

@@ -1,0 +1,8 @@
+title = "iCloud Drive"
+description = "iCloud Drive mounted with rclone, session reminder"
+api = 1
+side = "right"
+order = 6
+cmd = "./bin/icloud-state"
+interval = 300
+click = "./bin/icloud-reconnect"
