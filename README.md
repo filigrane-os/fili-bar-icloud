@@ -9,6 +9,8 @@ rclone config        # remote "icloud", type iclouddrive (password + 2FA)
 
 Start `bin/icloud-mount` at login; run `bin/watch-icloud` once a day (cron-watch) for the reminder; `bin/icloud-reconnect` renews the session (interactive).
 
+`fili-bar install` also runs `install.sh`: it creates your options file from `config.example.toml`, asks for what is missing (credentials go to the keyring or to a file under `~/.config`, never to this folder) and prints what is left to do. Run it again with `fili-bar setup icloud`; it is safe to repeat.
+
 ## Personal data
 
 Apple credentials stay in the rclone config (`~/.config/rclone/`), outside this repository. Options: copy `config.example.toml` to `~/.config/filigrane/bar/icloud.toml`.
