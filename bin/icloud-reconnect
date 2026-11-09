@@ -11,6 +11,6 @@ if rclone config reconnect icloud:; then
     setsid -f "$HOME/.local/bin/icloud-mount" >/dev/null 2>&1
     notify-send -u low -a icloud "iCloud reconnected" "Session valid for 30 days"
 else
-    echo; echo "Échec de la reconnexion."
+    echo; echo "Reconnection failed."
 fi
 read -rp "Enter to close"
