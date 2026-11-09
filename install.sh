@@ -20,4 +20,3 @@ if ! rclone listremotes 2>/dev/null | grep -qx "$remote"; then
         echo "create the remote: rclone config (name ${remote%:}, type iclouddrive)"
     fi
 fi
-echo "autostart: $here/bin/icloud-mount at login; daily reminder: $here/bin/watch-icloud (cron-watch)"

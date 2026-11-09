@@ -7,7 +7,7 @@ fili-bar install https://github.com/filigrane-os/fili-bar-icloud
 rclone config        # remote "icloud", type iclouddrive (password + 2FA)
 ```
 
-Start `bin/icloud-mount` at login; run `bin/watch-icloud` once a day (cron-watch) for the reminder; `bin/icloud-reconnect` renews the session (interactive).
+The daemon starts at login by itself (`autostart` in `module.toml`, run by niri through `fili-bar autostart`). For the daily session reminder, add a `cron-watch` job that runs `bin/watch-icloud`; `bin/icloud-reconnect` renews the session (interactive).
 
 `fili-bar install` also runs `install.sh`: it creates your options file from `config.example.toml`, asks for what is missing (credentials go to the keyring or to a file under `~/.config`, never to this folder) and prints what is left to do. Run it again with `fili-bar setup icloud`; it is safe to repeat.
 

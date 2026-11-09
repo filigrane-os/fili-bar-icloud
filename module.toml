@@ -6,3 +6,4 @@ order = 6
 cmd = "./bin/icloud-state"
 interval = 300
 click = "./bin/icloud-reconnect"
+autostart = ["./bin/icloud-mount"]
