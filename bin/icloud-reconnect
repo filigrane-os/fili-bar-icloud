@@ -8,7 +8,7 @@ if rclone config reconnect icloud:; then
     touch "$STATE/auth.stamp"
     fusermount3 -uz "$HOME/iCloud" 2>/dev/null  # the mount keeps the old session in memory
     sleep 1
-    setsid -f "$HOME/.local/bin/icloud-mount" >/dev/null 2>&1
+    setsid -f "$(dirname "$(readlink -f "$0")")/icloud-mount" >/dev/null 2>&1
     notify-send -u low -a icloud "iCloud reconnected" "Session valid for 30 days"
 else
     echo; echo "Reconnection failed."
