@@ -9,8 +9,8 @@ if rclone config reconnect icloud:; then
     fusermount3 -uz "$HOME/iCloud" 2>/dev/null  # the mount keeps the old session in memory
     sleep 1
     setsid -f "$HOME/.local/bin/icloud-mount" >/dev/null 2>&1
-    notify-send -u low -a icloud "iCloud reconnecté" "Session valable 30 jours"
+    notify-send -u low -a icloud "iCloud reconnected" "Session valid for 30 days"
 else
     echo; echo "Échec de la reconnexion."
 fi
-read -rp "Entrée pour fermer"
+read -rp "Enter to close"

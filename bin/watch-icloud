@@ -11,11 +11,11 @@ age=$(( ($(date +%s) - $(stat -c %Y "$STATE/auth.stamp")) / 86400 ))
 [ "$age" -lt "$WARN" ] && exit 0
 
 left=$(( LIFE - age ))
-if [ "$left" -gt 0 ]; then msg="La session expire dans $left j (code 2FA requis)"; else msg="La session a expiré: ~/iCloud ne répond plus"; fi
+if [ "$left" -gt 0 ]; then msg="The session expires in $left days (2FA code required)"; else msg="The session has expired: ~/iCloud no longer responds"; fi
 # notify-send -A waits for the click: in the background so as not to block cron-watch
 (
-    [ "$(notify-send -u critical -a icloud -A reconnect=Reconnecter "Reconnexion iCloud" "$msg")" = reconnect ] &&
-        "$HOME/.local/bin/bar-tui" icloud-reconnect
+    [ "$(notify-send -u critical -a icloud -A reconnect=Reconnect "iCloud reconnection" "$msg")" = reconnect ] &&
+        "$HOME/.local/bin/bar-tui" "$(dirname "$(readlink -f "$0")")/icloud-reconnect"
 ) >/dev/null 2>&1 &
 disown
 exit 0
